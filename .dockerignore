@@ -1,0 +1,47 @@
+# Node and dependency files
+node_modules
+npm-debug.log
+package-lock.json
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Editor/IDE
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+
+# Build artifacts
+dist
+build
+
+# Caches
+.cache
+
+# Large user folders (OneDrive etc.)
+**/OneDrive
+**/Desktop
+
+# Logs
+*.log
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Exclude anything that shouldn't be in image
+**/node_modules/**
+**/.git/**
