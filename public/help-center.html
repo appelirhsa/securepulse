@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Help Center - SecurePulse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styleSP.css">
+  <style>
+    .help-container {
+      max-width: 1000px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+
+    .help-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .help-header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .help-header p {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #0066cc;
+    }
+
+    .search-box button {
+      padding: 12px 25px;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .help-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .help-category {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .help-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .help-category i {
+      font-size: 2.5em;
+      color: #0066cc;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .help-category h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .help-category p {
+      color: #666;
+      font-size: 0.95em;
+    }
+
+    .faq-section {
+      margin-bottom: 40px;
+    }
+
+    .faq-section h2 {
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #0066cc;
+    }
+
+    .faq-item {
+      background: white;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: #f9f9f9;
+    }
+
+    .faq-question h4 {
+      margin: 0;
+      color: #333;
+      flex: 1;
+    }
+
+    .faq-question i {
+      color: #0066cc;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #f9f9f9;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      padding: 20px;
+      margin: 0;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .contact-section {
+      background: linear-gradient(135deg, #0066cc, #004a99);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      margin-top: 0;
+    }
+
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .contact-method {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .contact-method i {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .contact-method a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-method a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .help-header h1 {
+        font-size: 1.8em;
+      }
+
+      .help-categories {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .faq-answer p {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-content container">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">SP</div>
+      <span>SecurePulse</span>
+    </a>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="index.html#product">Product</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="help-center.html" class="active">Help</a>
+      <button class="login-btn" id="loginBtn">Login</button>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<div class="help-container">
+  <div class="help-header">
+    <h1>Help Center</h1>
+    <p>Find answers and get support for your SecurePulse device</p>
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search help articles..." id="searchInput">
+    <button onclick="searchHelp()">Search</button>
+  </div>
+
+  <div class="help-categories">
+    <div class="help-category" onclick="scrollToSection('getting-started')">
+      <i class="fas fa-rocket"></i>
+      <h3>Getting Started</h3>
+      <p>Learn how to set up and use your SecurePulse bracelet</p>
+    </div>
+    <div class="help-category" onclick="scrollToSection('troubleshooting')">
+      <i class="fas fa-wrench"></i>
+      <h3>Troubleshooting</h3>
+      <p>Resolve common issues and problems</p>
+    </div>
+    <div class="help-category" onclick="scrollToSection('account')">
+      <i class="fas fa-user-circle"></i>
+      <h3>Account & Settings</h3>
+      <p>Manage your profile and preferences</p>
+    </div>
+    <div class="help-category" onclick="scrollToSection('safety')">
+      <i class="fas fa-shield-alt"></i>
+      <h3>Safety & Emergency</h3>
+      <p>Emergency alerts and safety features</p>
+    </div>
+  </div>
+
+  <div id="getting-started" class="faq-section">
+    <h2><i class="fas fa-rocket"></i> Getting Started</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>How do I set up my SecurePulse bracelet?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          <strong>Step 1:</strong> Charge your bracelet using the provided USB cable for at least 2 hours.<br>
+          <strong>Step 2:</strong> Download the SecurePulse app and create an account.<br>
+          <strong>Step 3:</strong> Open the app and tap "Add Device".<br>
+          <strong>Step 4:</strong> Hold your bracelet near your phone and follow the pairing instructions.<br>
+          <strong>Step 5:</strong> Once paired, your bracelet will start monitoring your health metrics.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>What is the battery life of SecurePulse?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          SecurePulse has a battery life of up to 14 days on a single charge with normal usage. Battery life may vary depending on your usage patterns, frequency of monitoring, and features enabled. We recommend charging your bracelet once every 10-12 days to ensure optimal performance.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Is SecurePulse waterproof?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Yes! SecurePulse is fully waterproof with an IP68 rating. You can wear it while swimming, showering, or water sports. However, we recommend avoiding submersion in water deeper than 50 meters or for extended periods. For best results, rinse your bracelet with fresh water after exposure to salt water or chlorine.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>What health metrics does SecurePulse track?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          SecurePulse tracks the following metrics:<br>
+          • Heart Rate (bpm)<br>
+          • Blood Oxygen Level (SpO2)<br>
+          • Body Temperature<br>
+          • Sleep Duration and Quality<br>
+          • Step Count and Distance<br>
+          • Calorie Burn<br>
+          • Movement and Fall Detection
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="troubleshooting" class="faq-section">
+    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>My bracelet won't connect to my phone</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Try these troubleshooting steps:<br>
+          1. Ensure Bluetooth is enabled on your phone<br>
+          2. Restart both your bracelet and phone<br>
+          3. Remove the bracelet from the app and try pairing again<br>
+          4. Make sure your phone is within 10 meters of the bracelet<br>
+          5. Check that no other app is using Bluetooth<br>
+          6. Update the SecurePulse app to the latest version
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Inaccurate heart rate readings</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Heart rate readings can be affected by several factors:<br>
+          • Make sure the bracelet is worn snugly on your wrist<br>
+          • Ensure good contact between the sensors and your skin<br>
+          • Avoid wearing the bracelet too loosely or over clothing<br>
+          • Allow 2-3 minutes for stabilization after putting on the bracelet<br>
+          • Avoid movement while taking a reading<br>
+          • If the issue persists, try restarting the app
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Battery drains too quickly</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          To extend battery life:<br>
+          • Reduce the monitoring frequency in settings<br>
+          • Disable continuous heart rate monitoring<br>
+          • Turn off GPS tracking when not needed<br>
+          • Reduce screen brightness<br>
+          • Close unnecessary apps on your phone<br>
+          • Ensure your bracelet firmware is up to date
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Data not syncing to the app</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          If your health data isn't syncing:<br>
+          1. Check your internet connection<br>
+          2. Ensure the bracelet is paired with your phone<br>
+          3. Force close the app and reopen it<br>
+          4. Restart both devices<br>
+          5. Check that you're logged into your account<br>
+          6. Try manually syncing in the app settings
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="account" class="faq-section">
+    <h2><i class="fas fa-user-circle"></i> Account & Settings</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>How do I reset my password?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          To reset your password:<br>
+          1. Go to the login page<br>
+          2. Click "Forgot Password"<br>
+          3. Enter your email address<br>
+          4. Check your email for a password reset link<br>
+          5. Click the link and enter your new password<br>
+          6. Log in with your new password
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>How do I upgrade my plan?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          To upgrade your plan:<br>
+          1. Log into your account<br>
+          2. Go to Settings > Subscription<br>
+          3. Click "Upgrade Plan"<br>
+          4. Select your preferred plan<br>
+          5. Enter payment information<br>
+          6. Confirm your upgrade<br>
+          Your new plan benefits will be active immediately.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>How do I delete my account?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          To delete your account:<br>
+          1. Log into your account<br>
+          2. Go to Settings > Account<br>
+          3. Scroll to the bottom and click "Delete Account"<br>
+          4. Read the warning and enter your password<br>
+          5. Click "Permanently Delete"<br>
+          <strong>Warning:</strong> This action is irreversible and will delete all your data.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="safety" class="faq-section">
+    <h2><i class="fas fa-shield-alt"></i> Safety & Emergency</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>How do I trigger an emergency SOS?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          In case of emergency:<br>
+          • Press and hold the side button on your bracelet for 3 seconds<br>
+          • Or tap the SOS button in the app<br>
+          Your location and medical information will be sent to emergency contacts and responders immediately. The SOS button is designed to be easily accessible even in stressful situations.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Does SecurePulse work offline?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          SecurePulse can monitor your health metrics even without a connection. However, to send emergency alerts and notifications, your bracelet needs to be connected to your phone, which must have an internet connection. Your health data will be synced once the connection is restored.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Is my data secure and private?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Yes! We take your privacy seriously:<br>
+          • All data is encrypted in transit and at rest<br>
+          • We use industry-standard security protocols<br>
+          • Your data is never shared with third parties without consent<br>
+          • You have full control over your data and can export or delete it anytime<br>
+          • We comply with GDPR and other privacy regulations
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFAQ(this)">
+        <h4>Who receives my emergency alerts?</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>
+          When you trigger an emergency alert:<br>
+          • All designated emergency contacts receive an alert with your location<br>
+          • Local emergency services are notified (if enabled)<br>
+          • Your medical information is shared to help responders<br>
+          • You can manage your emergency contacts in Settings
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h2>Still need help?</h2>
+    <p>Can't find what you're looking for? Reach out to our support team.</p>
+    <div class="contact-methods">
+      <div class="contact-method">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:support@securepulse.com">support@securepulse.com</a>
+      </div>
+      <div class="contact-method">
+        <i class="fas fa-phone"></i>
+        <a href="tel:+27115551234">+27 (11) 555-1234</a>
+      </div>
+      <div class="contact-method">
+        <i class="fas fa-comments"></i>
+        <a href="contact.html">Contact Form</a>
+      </div>
+      <div class="contact-method">
+        <i class="fas fa-clock"></i>
+        <span>Available 24/7</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="mainSP.js"></script>
+<script>
+  function toggleFAQ(element) {
+    const item = element.closest('.faq-item');
+    item.classList.toggle('active');
+  }
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function searchHelp() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
+      const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+      
+      if (question.includes(query) || answer.includes(query) || query === '') {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Search on enter key
+  document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') searchHelp();
+  });
+</script>
+
+</body>
+</html>
